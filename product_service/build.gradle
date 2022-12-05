@@ -1,0 +1,23 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'com.google.cloud.tools.jib'
+}
+
+group = parent.group
+version = parent.version
+
+dependencies {
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Configuration processor
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jib.from.image = "openjdk:17-alpine"
+jib.container.jvmFlags = ["-XX:InitialRAMPercentage=75","-XX:MaxRAMPercentage=75","-XX:MaxMetaspaceSize=256m","-Dfile.encoding=UTF-8","-Dspring.profiles.active=compose"]

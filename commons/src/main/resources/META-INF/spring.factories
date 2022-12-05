@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  coding.challenge.common.api.controller.BasicExceptionHandler,\
+  coding.challenge.common.api.controller.ServletExceptionHandler

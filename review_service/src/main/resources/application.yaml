@@ -1,0 +1,36 @@
+app:
+  editor:
+    login: user
+    password: 1234
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/challenge-db
+    username: user
+    password: 1234
+    hikari:
+      schema: public
+      maximum-pool-size: 5
+  jpa:
+    database: postgresql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        show_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      schema-locations: classpath:db/schema.sql
+      mode: always
+
+logging:
+  level:
+    coding.challenge.product.client: DEBUG
+
+server:
+  port: 8081

@@ -1,0 +1,58 @@
+plugins {
+    id 'io.freefair.lombok' apply false
+    id 'io.spring.dependency-management' apply false
+//    id 'com.google.cloud.tools.jib' apply false
+}
+
+group = 'coding.challenge'
+
+allprojects {
+    apply plugin: 'idea'
+    repositories {
+        google()
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    dependencyManagement {
+        dependencies {
+            dependency "org.springframework.boot:spring-boot-dependencies:$VERSION_OF_SPRING_BOOT"
+            dependency "org.springframework.cloud:spring-cloud-dependencies:$VERSION_OF_SPRING_CLOUD"
+
+            //Mapstruct
+            dependency "org.mapstruct:mapstruct:$VERSION_OF_MAPSTRUCT"
+            dependency "org.mapstruct:mapstruct-processor:$VERSION_OF_MAPSTRUCT"
+            dependency "net.datafaker:datafaker:$VERSION_OF_DATAFAKER"
+
+        }
+    }
+
+    dependencies {
+
+        implementation platform ('org.springframework.boot:spring-boot-dependencies')
+        implementation platform ('org.springframework.cloud:spring-cloud-dependencies')
+        annotationProcessor platform ('org.springframework.boot:spring-boot-dependencies')
+    }
+
+    testing {
+        suites {
+            test {
+                useJUnitJupiter()
+            }
+        }
+    }
+}
+
+rootProject.wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = VERSION_OF_GRADLE
+}

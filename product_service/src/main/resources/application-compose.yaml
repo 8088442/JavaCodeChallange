@@ -1,0 +1,9 @@
+app:
+  client:
+    base-url:
+      review: http://review-service:8080/review
+server:
+  port: 8080
+logging:
+  level:
+    coding.challenge.product.client: INFO

@@ -1,0 +1,24 @@
+app:
+  client:
+    base-url:
+      adidas: https://www.adidas.co.uk/api/products
+      review: http://localhost:8081/review
+
+feign:
+  client:
+    config:
+      default:
+        default-request-headers:
+          User-Agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Chrome/107.0.0.0 Safari/537.36"
+          Content-Type: "application/json"
+          Accept: "application/json"
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+logging:
+  level:
+    coding.challenge.product.client: DEBUG
+
+server:
+  port: 8082
